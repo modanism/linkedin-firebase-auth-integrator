@@ -33,13 +33,29 @@ router.post("/", async (req, res) => {
     console.log(validationData);
 
     if (!validationData.active) {
-      return res.status(400).send({ error: "Invalid LinkedIn access token" });
+      return res
+        .status(400)
+        .send({
+          status: "error",
+          message: `Invalid LinkedIn access token`,
+          firebaseToken: null,
+        });
     }
 
     const customToken = await admin.auth().createCustomToken(linkedInUID);
-    res.send({ firebaseToken: customToken });
+    res.send({
+      status: "success",
+      message: "Success",
+      firebaseToken: customToken,
+    });
   } catch (error) {
-    res.status(500).send({ error: `Error generating custom token | ${error}` });
+    res
+      .status(500)
+      .send({
+        status: "error",
+        message: `Error generating custom token | ${error}`,
+        firebaseToken: null,
+      });
   }
 });
 
