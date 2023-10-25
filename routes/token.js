@@ -11,8 +11,8 @@ router.post("/", async (req, res) => {
   console.log(`uid : ${linkedInUID}`);
 
   // Validate the LinkedIn access token
-  const clientId = "77pv0j45iro4cd"; // Replace with your actual client ID
-  const clientSecret = "LQKSW66VfAIrulyQ"; // Replace with your actual client secret
+  const clientId = process.env.LINKEDIN_CLIENT_ID;
+  const clientSecret = process.env.LINKEDIN_CLIENT_SECRET;
 
   try {
     const validationResponse = await axios.post(
